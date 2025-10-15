@@ -188,23 +188,53 @@ button,
   to { transform: rotate(6deg) scale(1.02); }
 }
 
-.orbit {
+.orbit{
   position: absolute;
-  inset: 15%;
+  inset: 0;                      /* la órbita toma el tamaño del planeta */
   border-radius: 50%;
-  border: 1px dashed rgba(255, 255, 255, 0.15);
   display: grid;
   place-items: center;
+  transform-style: preserve-3d;
+  transform: rotateX(58deg) rotateZ(-20deg); /* inclinación global */
+  z-index: 4;                    /* por delante de planeta y anillos */
+  /* radio responsive para que SIEMPRE quede afuera del planeta */
+  --orb-r: clamp(180px, 32vw, 240px); /* ajustá si lo querés más lejos/cerca */
+}
+.orbit-tilt{
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  transform-style: preserve-3d;
+  /* inclinación base */
+  transform: rotateX(58deg) rotateY(0deg);
+  z-index: 4;
 }
 
-.satellite {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent-2), rgba(155, 94, 255, 0.9));
-  box-shadow: 0 15px 35px rgba(0, 212, 255, 0.4);
-  animation: orbit 12s linear infinite;
+.orbit-spin{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
 }
+
+/* --- Satélite: SOLO imagen (sin esfera vieja) --- */
+.satellite{
+  position: absolute;
+  width: 64px;                   /* tamaño del gato */
+  height: 64px;
+  left: 50%; top: 50%;
+  /* se coloca a la derecha del centro a distancia --orb-r  */
+  transform: translate3d(var(--orb-r), -50%, 0);
+  transform-origin: center;
+  transform-style: preserve-3d;
+  z-index: 5;                    /* SIEMPRE por delante: “pisando” el planeta */
+  background: none !important;   /* elimina la luna-esfera vieja */
+  box-shadow: none;              /* por si quedó algún drop-shadow viejo */
+  animation: none;               /* quita cualquier bounce previo (moon-bob) */
+}
+
 
 @keyframes orbit {
   from { transform: rotate(0deg) translateX(140px) rotate(0deg); }
@@ -538,4 +568,244 @@ body::before {
 
 @media (prefers-reduced-motion: reduce){
   .bg-aurora{ animation: none; }
+}
+
+/* --- Escena 3D suave --- */
+.hero-visual{
+  position: relative;
+  width: min(420px, 100%);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* --- Planeta con atmósfera y terminador (día/noche) --- */
+.planet{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%,
+    rgba(255,255,255,0.8),
+    rgba(155, 94, 255, 0.28),
+    rgba(5, 3, 13, 0.95));
+  box-shadow:
+    inset -30px -40px 60px rgba(0,0,0,0.55),
+    0 50px 100px rgba(0,0,0,0.35);
+  animation: planet-glow 6s ease-in-out infinite alternate;
+  z-index: 2; /* delante del anillo trasero, detrás del frontal */
+}
+
+/* Atmósfera exterior (halo) */
+.planet::before{
+  content: '';
+  position: absolute;
+  inset: -4%;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(0,212,255,0.18),
+    rgba(155,94,255,0.12) 55%,
+    rgba(0,0,0,0) 70%);
+  filter: blur(6px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Terminador (sombreado según "luz") */
+.planet::after{
+  content: '';
+  position: absolute;
+  inset: -1%;
+  border-radius: 50%;
+  /* La "luz" se controla con --lx/--ly (se setean por JS) */
+  --lx: 30%;
+  --ly: 35%;
+  background:
+    radial-gradient(140% 140% at var(--lx) var(--ly),
+      rgba(255,255,255,0.20),
+      rgba(255,255,255,0.06) 28%,
+      rgba(0,0,0,0.35) 58%,
+      rgba(0,0,0,0.75) 85%);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+/* --- Anillos 3D en dos capas para dar profundidad --- */
+.ring{
+  position: absolute;
+  inset: -6%;
+  border-radius: 50%;
+  transform-style: preserve-3d;
+  transform: rotateX(62deg) rotateZ(-18deg);
+  filter: drop-shadow(0 16px 24px rgba(0,0,0,0.35));
+  will-change: transform;
+}
+
+/* Textura del anillo con “polvo” */
+.ring::before{
+  content: '';
+  position: absolute;
+  inset: 18% 8%;
+  border-radius: 50%;
+  background:
+    conic-gradient(from 0deg,
+      rgba(155,94,255,0.14),
+      rgba(0,212,255,0.18),
+      rgba(255,255,255,0.10),
+      rgba(155,94,255,0.14));
+  -webkit-mask:
+    radial-gradient(circle at center,
+      transparent 0 48%,
+      #000 49% 70%,
+      transparent 71% 100%);
+          mask:
+    radial-gradient(circle at center,
+      transparent 0 48%,
+      #000 49% 70%,
+      transparent 71% 100%);
+  opacity: 0.9;
+}
+
+/* Profundidad: el trasero va detrás del planeta */
+.ring-back{ z-index: 1; }
+/* El frontal por encima del planeta para “pasar por delante” */
+.ring-front{ z-index: 3; opacity: 0.85; }
+
+
+/* --- Órbita y Luna mejoradas --- */
+.orbit{
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  transform-style: preserve-3d;
+  transform: rotateX(58deg) rotateZ(-20deg);
+  z-index: 4; /* por delante del planeta */
+}
+
+.satellite{
+  position: absolute;
+  width: clamp(44px, 7.2vw, 62px);
+  height: clamp(44px, 7.2vw, 62px);
+  border-radius: 50%;
+  /* Esfera con sombreado: el punto de luz se mueve con --lx/--ly */
+  background:
+    radial-gradient(circle at var(--lx,30%) var(--ly,35%),
+      rgba(255,255,255,0.95),
+      rgba(220,230,255,0.35) 28%,
+      rgba(130,140,180,0.25) 52%,
+      rgba(10,12,24,0.85) 88%);
+  box-shadow:
+    0 10px 24px rgba(0,0,0,0.35),
+    0 0 16px rgba(0,212,255,0.25);
+  transform: translateX(150px); /* radio orbital */
+  will-change: transform;
+}
+
+/* Cola sutil de la luna (estela) */
+.satellite .tail{
+  position: absolute;
+  content: '';
+  right: 50%;
+  top: 50%;
+  width: 120px;
+  height: 2px;
+  transform-origin: right center;
+  transform: translate(0,-50%) rotate(180deg);
+  background: linear-gradient(90deg,
+    rgba(230,240,255,0.35),
+    rgba(230,240,255,0.12) 45%,
+    rgba(230,240,255,0));
+  filter: blur(0.6px);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Pequeño “flotado” de la luna */
+@keyframes moon-bob {
+  from { transform: translateX(150px) translateY(-4px); }
+  to   { transform: translateX(150px) translateY(4px); }
+}
+.satellite { animation: moon-bob 2.8s ease-in-out infinite alternate; }
+
+/* Ajuste de tu animación existente del planeta */
+@keyframes planet-glow {
+  from { transform: rotate(0deg) scale(0.985); }
+  to   { transform: rotate(6deg) scale(1.015); }
+}
+
+/* Respeta accesibilidad */
+@media (prefers-reduced-motion: reduce){
+  .ring-front, .satellite { animation: none !important; }
+}
+
+/* Base transform de los anillos: GSAP controlará rotateZ, acá dejamos X/Y fijos */
+.ring{
+  transform: rotateX(62deg) rotateY(0deg) rotateZ(0deg) translateZ(0px);
+}
+
+.ring-back  { transform: rotateX(62deg) rotateY(0) rotateZ(0) translateZ(-4px); }
+.ring-front { transform: rotateX(62deg) rotateY(0) rotateZ(0) translateZ( 4px); }
+
+.sat-img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+  display: block;
+  pointer-events: none;
+  filter: drop-shadow(0 0 6px rgba(0,0,0,0.5));
+  /* corrige la inclinación para que se vea de frente */
+  transform: rotateX(-58deg) rotateY(0deg);
+  backface-visibility: hidden;
+  /* giro reversible (va y vuelve, no muestra “espalda”) MÁS RÁPIDO */
+  animation: cat-spin-bounce 6s ease-in-out infinite;
+}
+/* Si usás imagen, podés suavizar el “sombreado” del fondo de la luna: */
+.satellite{
+  background: none; /* quita el radial-gradient que hacía de “luna” */
+    width: 60px;          /* o el tamaño que quieras */
+  height: 60px;
+  position: absolute;
+  top: 20%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+}
+
+.satellite {
+  transform: scale(0.6) translate(200px, 0);
+  transform-origin: center;
+}
+
+.satellite {
+  transform-style: preserve-3d;
+}
+
+.sat-img {
+  transform: rotateX(-60deg) rotateY(0deg) rotateZ(0deg);
+  backface-visibility: hidden;
+}
+
+@keyframes cat-spin-bounce {
+  0%   { transform: rotateX(-58deg) rotateY(0deg); }
+  50%  { transform: rotateX(-58deg) rotateY(90deg); }
+  100% { transform: rotateX(-58deg) rotateY(0deg); }
+}
+.sat-img {
+  animation: cat-spin-bounce 4s ease-in-out infinite;
+}
+.satellite {
+  width: 64px;
+  height: 64px;
+  transform: translate(200px, 0);
+}
+
+.sat-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 6px rgba(0,0,0,0.5));
 }

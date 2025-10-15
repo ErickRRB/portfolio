@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="image" href="assets/cat-companion.png">
+  <link rel="preload" as="image" href="assets/cat-astronaut.png">
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -37,10 +38,21 @@
       </div>
       <div class="hero-visual">
         <div class="planet"></div>
-        <div class="orbit">
-          <div class="satellite"></div>
+
+        <!-- Anillos -->
+        <div class="ring ring-back" aria-hidden="true"></div>
+        <div class="ring ring-front" aria-hidden="true"></div>
+
+        <div class="orbit orbit-tilt">
+          <div class="orbit-spin">
+            <div class="satellite" aria-label="Luna">
+              <img class="sat-img" src="assets/cat-astronaut.png" alt="Gatito astronauta" />
+              <span class="tail" aria-hidden="true"></span>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
   </header>
 
@@ -195,3 +207,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+
