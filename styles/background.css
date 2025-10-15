@@ -34,3 +34,19 @@
     animation: none;
   }
 }
+
+/* Optimize background effects on mobile */
+@media (max-width: 900px) {
+  .bg-aurora {
+    filter: blur(12px) saturate(100%); /* Reduce blur on mobile */
+    opacity: 0.25;
+    animation-duration: 40s; /* Slower animation */
+  }
+
+  @media (max-width: 600px) {
+    .bg-aurora {
+      animation: none; /* Disable on small screens for performance */
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+}
