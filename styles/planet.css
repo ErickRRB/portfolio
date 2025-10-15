@@ -27,13 +27,7 @@
     inset 10px 10px 40px rgba(155, 94, 255, 0.15),
     0 50px 100px rgba(0, 0, 0, 0.35),
     0 0 60px rgba(155, 94, 255, 0.2);
-  animation: planet-glow 6s ease-in-out infinite alternate;
   z-index: 2;
-}
-
-@keyframes planet-glow {
-  from { transform: rotate(0deg) scale(0.985); }
-  to { transform: rotate(6deg) scale(1.015); }
 }
 
 /* Atmósfera exterior */
@@ -103,6 +97,35 @@
   -webkit-mask: radial-gradient(circle at 50% 50%, transparent 0 52%, #000 54% 70%, transparent 73% 100%);
   mask: radial-gradient(circle at 50% 50%, transparent 0 52%, #000 54% 70%, transparent 73% 100%);
   opacity: .9;
+}
+
+/* Efecto shimmer en los anillos */
+.ring::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 8%,
+    rgba(255, 255, 255, 0.15) 15%,
+    rgba(0, 212, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.25) 25%,
+    rgba(255, 255, 255, 0.15) 30%,
+    rgba(255, 255, 255, 0.05) 37%,
+    transparent 45%,
+    transparent 100%
+  );
+  -webkit-mask: radial-gradient(circle at 50% 50%, transparent 0 52%, #000 54% 70%, transparent 73% 100%);
+  mask: radial-gradient(circle at 50% 50%, transparent 0 52%, #000 54% 70%, transparent 73% 100%);
+  animation: ring-shimmer 12s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes ring-shimmer {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .ring-back {

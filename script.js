@@ -377,8 +377,8 @@ window.addEventListener('scroll', () => {
   // Posición inicial de la luz
   setLight(30, 35);
 
-  // Spin continuo de los anillos (sincronizados como planeta real)
-  gsap.to('.ring, .ring-back, .ring-front', { rotation: '+=360', duration: 35, ease: 'none', repeat: -1 });
+  // Los anillos ahora permanecen estáticos para evitar efecto de "rodado"
+  // gsap.to('.ring, .ring-back, .ring-front', { rotation: '+=360', duration: 35, ease: 'none', repeat: -1 });
 
   // Parallax suave del mouse (sin quickTo para evitar errores)
   let _rafMouse = null;
