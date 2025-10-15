@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test Images</title>
+  <style>
+    body {
+      background: #1a1a2e;
+      color: white;
+      padding: 50px;
+      font-family: Arial;
+    }
+    img {
+      border: 2px solid lime;
+      margin: 20px;
+    }
+    .cursor-test {
+      width: 200px;
+      height: 200px;
+      background: #333;
+      cursor: url('assets/mouse-cursor.svg') 6 2, auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Test de Imágenes</h1>
+
+  <h2>Gato (PNG):</h2>
+  <img src="assets/cat-companion.png" alt="Gato" width="200">
+
+  <h2>Cursor (SVG como imagen):</h2>
+  <img src="assets/mouse-cursor.svg" alt="Cursor" width="100">
+
+  <h2>Cursor (como cursor real - pasa el mouse aquí):</h2>
+  <div class="cursor-test">
+    Mueve el mouse aquí
+  </div>
+
+  <script>
+    console.log('Verificando carga de imágenes...');
+
+    const catImg = new Image();
+    catImg.src = 'assets/cat-companion.png';
+    catImg.onload = () => console.log('✓ Gato cargado correctamente');
+    catImg.onerror = () => console.error('✗ Error cargando gato');
+
+    const cursorImg = new Image();
+    cursorImg.src = 'assets/mouse-cursor.svg';
+    cursorImg.onload = () => console.log('✓ Cursor cargado correctamente');
+    cursorImg.onerror = () => console.error('✗ Error cargando cursor');
+  </script>
+</body>
+</html>

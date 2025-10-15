@@ -16,17 +16,20 @@ yearTag.textContent = new Date().getFullYear();
 
 if (catContainer) {
   const catImageSrc = catContainer.dataset.catSrc;
+  console.log('Cat image src:', catImageSrc);
   if (catImageSrc) {
     const catIllustration = new Image();
     catIllustration.alt = 'Ilustración de Rorschach, el gato guía felino.';
     catIllustration.loading = 'lazy';
     catIllustration.decoding = 'async';
     catIllustration.addEventListener('load', () => {
+      console.log('✓ Cat image loaded successfully!');
       catContainer.dataset.loaded = 'true';
       catContainer.appendChild(catIllustration);
       catGuide.classList.add('cat-ready');
     });
-    catIllustration.addEventListener('error', () => {
+    catIllustration.addEventListener('error', (e) => {
+      console.error('✗ Error loading cat image:', e);
       catGuide.classList.add('cat-image-missing');
       if (catMessage) {
         catMessage.textContent = 'Añade la ilustración del gatito en assets/cat-companion.png para verlo aquí.';
@@ -34,19 +37,25 @@ if (catContainer) {
     });
     catIllustration.src = catImageSrc;
   }
+} else {
+  console.error('Cat container not found!');
 }
 
 if (window.fetch) {
   const mouseCursorSrc = document.body.dataset.mouseCursor || 'assets/mouse-cursor.svg';
+  console.log('Mouse cursor src:', mouseCursorSrc);
   fetch(mouseCursorSrc, { method: 'HEAD' })
     .then((response) => {
       if (response.ok) {
+        console.log('✓ Cursor SVG loaded successfully!');
         document.documentElement.style.setProperty('--mouse-cursor', `url("${mouseCursorSrc}") 6 2, auto`);
         document.documentElement.style.setProperty('--mouse-cursor-interactive', `url("${mouseCursorSrc}") 6 2, pointer`);
+      } else {
+        console.error('✗ Cursor SVG not found (status:', response.status, ')');
       }
     })
-    .catch(() => {
-      /* Ignored: cursor asset optional */
+    .catch((e) => {
+      console.error('✗ Error loading cursor:', e);
     });
 }
 
