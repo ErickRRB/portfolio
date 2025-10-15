@@ -24,8 +24,10 @@
   padding: 1rem 1.2rem;
   max-width: 220px;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Safari iOS support */
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
   transition: transform 0.4s ease;
+  will-change: transform; /* iOS performance */
 }
 
 .cat-dialog p {

@@ -52,20 +52,32 @@ if (catContainer) {
   if (catImageSrc) {
     const catIllustration = new Image();
     catIllustration.alt = 'Ilustración de Rorschach, el gato guía felino.';
-    catIllustration.loading = 'lazy';
+    // Safari iOS fix: no usar lazy loading
+    if ('loading' in HTMLImageElement.prototype) {
+      catIllustration.loading = 'eager';
+    }
     catIllustration.decoding = 'async';
+
     catIllustration.addEventListener('load', () => {
       catContainer.dataset.loaded = 'true';
       catContainer.appendChild(catIllustration);
       catGuide.classList.add('cat-ready');
+      // Force reflow for iOS
+      void catIllustration.offsetWidth;
     });
-    catIllustration.addEventListener('error', () => {
+
+    catIllustration.addEventListener('error', (e) => {
+      console.error('Error loading cat image:', e);
       catGuide.classList.add('cat-image-missing');
       if (catMessage) {
-        catMessage.textContent = 'Añade la ilustración del gatito en assets/cat-companion.png para verlo aquí.';
+        catMessage.textContent = 'Error cargando imagen';
       }
     });
-    catIllustration.src = catImageSrc;
+
+    // iOS Safari fix: set src after all listeners
+    setTimeout(() => {
+      catIllustration.src = catImageSrc;
+    }, 100);
   }
 }
 

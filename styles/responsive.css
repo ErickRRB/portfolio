@@ -72,12 +72,8 @@
 
   /* Prevent horizontal overflow */
   .hero-visual {
-    max-width: 100%;
-    overflow: hidden;
-  }
-
-  .planet, .ring, .orbit {
-    max-width: 100%;
+    max-width: 90%;
+    margin: 0 auto;
   }
 
   .bg-stars, .bg-aurora {
@@ -88,5 +84,28 @@
   section, main {
     overflow-x: hidden;
     max-width: 100vw;
+  }
+
+  /* Remove section background glow on mobile */
+  .section::before {
+    display: none;
+  }
+
+  .section {
+    overflow: visible;
+    margin-top: 4rem;
+  }
+
+  /* Fix card backgrounds and overflow on mobile */
+  .skill-card, .project-card, .contact-card {
+    background: rgba(16, 12, 33, 0.4);
+    backdrop-filter: blur(6px);
+    overflow: visible;
+  }
+
+  .skill-card, .project-card {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    animation: none !important;
   }
 }
