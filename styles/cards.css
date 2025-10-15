@@ -12,12 +12,30 @@
   padding: 1.8rem;
   box-shadow: var(--shadow);
   backdrop-filter: blur(12px);
-  transition: transform 0.25s ease, border-color 0.25s ease;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.6s ease forwards;
 }
 
+.skill-card:nth-child(1) { animation-delay: 0.1s; }
+.skill-card:nth-child(2) { animation-delay: 0.2s; }
+.skill-card:nth-child(3) { animation-delay: 0.3s; }
+
 .skill-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-12px) scale(1.02);
   border-color: var(--accent-2);
+  box-shadow:
+    var(--shadow),
+    0 0 30px rgba(155, 94, 255, 0.3),
+    0 0 60px rgba(0, 212, 255, 0.2);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .skill-card h3 {
@@ -48,6 +66,21 @@
   gap: 1rem;
   position: relative;
   overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(40px) scale(0.95);
+  animation: fadeInScale 0.7s ease forwards;
+}
+
+.project-card:nth-child(1) { animation-delay: 0.1s; }
+.project-card:nth-child(2) { animation-delay: 0.25s; }
+.project-card:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes fadeInScale {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .project-card::after {
@@ -58,10 +91,24 @@
   mix-blend-mode: screen;
   opacity: 0;
   transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--accent);
+  box-shadow:
+    var(--shadow),
+    0 0 40px rgba(155, 94, 255, 0.25);
 }
 
 .project-card:hover::after {
   opacity: 1;
+}
+
+.project-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .project-header {
@@ -78,6 +125,17 @@
   border: 1px solid var(--accent-2);
   border-radius: 999px;
   padding: 0.4rem 0.8rem;
+  position: relative;
+  animation: badge-pulse 3s ease-in-out infinite;
+}
+
+@keyframes badge-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(0, 212, 255, 0);
+  }
 }
 
 .project-stack {

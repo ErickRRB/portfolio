@@ -12,9 +12,40 @@ const messages = {
   contacto: '¿Colaboramos? Prometo llevar tu mensaje a Erick con mi collar rojo reluciente.'
 };
 
+const messagesMobile = {
+  inicio: '¡Hola! 👋',
+  'sobre-mi': 'Sobre Erick 📖',
+  habilidades: 'Skills ⚡',
+  proyectos: 'Proyectos 🚀',
+  contacto: '¡Hablemos! 💬'
+};
+
 
 
 yearTag.textContent = new Date().getFullYear();
+
+// Scroll Progress Indicator
+const scrollProgress = document.querySelector('.scroll-progress');
+const nav = document.querySelector('.nav');
+
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+
+  if (scrollProgress) {
+    scrollProgress.style.width = scrollPercent + '%';
+  }
+
+  // Navbar glassmorphism effect
+  if (nav) {
+    if (scrollTop > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }
+}, { passive: true });
 
 if (catContainer) {
   const catImageSrc = catContainer.dataset.catSrc;
@@ -54,7 +85,8 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       const id = entry.target.id;
-      const message = messages[id];
+      const isMobile = window.innerWidth <= 900;
+      const message = isMobile ? messagesMobile[id] : messages[id];
       if (message && !catGuide.classList.contains('cat-image-missing')) {
         catGuide.classList.add('is-speaking');
         catMessage.textContent = message;
