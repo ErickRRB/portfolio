@@ -19,17 +19,19 @@ export function initStarfield() {
 
   // Config - adjusted based on device
   const getConfig = () => {
-    const shouldReduce = DeviceDetect.shouldReduceAnimations();
+    const isMobile = DeviceDetect.isMobile();
+    const reducedMotion = DeviceDetect.prefersReducedMotion();
+
     return {
-      STAR_COUNT_BASE: shouldReduce ? 80 : 140,
-      LINK_DIST: shouldReduce ? 100 : 150,
+      STAR_COUNT_BASE: isMobile ? 100 : 140,
+      LINK_DIST: isMobile ? 120 : 150,
       MAX_R: 1.8,
-      PARALLAX_X: shouldReduce ? 6 : 12,
-      PARALLAX_Y: shouldReduce ? 4 : 8,
-      BG_GLOW: !shouldReduce,
-      MOTION_SPEED: shouldReduce ? 0.008 : 0.015,
-      ENABLE_TRAILS: !shouldReduce,
-      ENABLE_CAT_ASTEROIDS: !shouldReduce
+      PARALLAX_X: isMobile ? 8 : 12,
+      PARALLAX_Y: isMobile ? 5 : 8,
+      BG_GLOW: !reducedMotion,
+      MOTION_SPEED: isMobile ? 0.01 : 0.015,
+      ENABLE_TRAILS: !isMobile && !reducedMotion, // Disable trails on mobile only
+      ENABLE_CAT_ASTEROIDS: !isMobile && !reducedMotion // Disable cat asteroids on mobile only
     };
   };
 
@@ -255,10 +257,9 @@ export function initStarfield() {
     }
   }
 
-  // Handle reduced motion preference
+  // Handle reduced motion preference - only pause if user explicitly prefers reduced motion
   const updateMotionPreference = () => {
-    const shouldPause = DeviceDetect.prefersReducedMotion();
-    paused = shouldPause;
+    paused = DeviceDetect.prefersReducedMotion();
     config = getConfig(); // Update config based on new preference
 
     if (paused) {

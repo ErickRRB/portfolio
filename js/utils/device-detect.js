@@ -34,11 +34,12 @@ export const DeviceDetect = {
   },
 
   /**
-   * Check if animations should be reduced
-   * Returns true for: reduced motion preference OR mobile Safari/iOS
+   * Check if animations should be heavily reduced (accessibility)
+   * Returns true only for explicit reduced motion preference
+   * For mobile optimization, use isMobile() separately
    */
   shouldReduceAnimations() {
-    return this.prefersReducedMotion() || (this.isMobile() && (this.isIOS() || this.isSafari()));
+    return this.prefersReducedMotion();
   },
 
   /**
