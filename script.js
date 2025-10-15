@@ -4,11 +4,11 @@ const catGuide = document.querySelector('.cat-guide');
 const yearTag = document.getElementById('year');
 
 const messages = {
-  inicio: '¡Bienvenido! Soy tu guía gatuna. Sigue bajando.',
-  'sobre-mi': 'Aquí conocerás mi historia y motivaciones.',
-  habilidades: 'Estas son mis habilidades favoritas para crear magia.',
-  proyectos: 'Mira lo que he construido entre siestas y teclados.',
-  contacto: '¿Colaboramos? Miau-mándame un mensaje.'
+  inicio: '¡Bienvenido! Soy Rorschach, tu guía felino. Sigue bajando.',
+  'sobre-mi': 'Aquí te cuento parte de la historia de Erick, yo lo acompaño en cada línea de código.',
+  habilidades: 'Estas son las habilidades favoritas de mi humano para crear magia.',
+  proyectos: 'Mira lo que hemos construido entre siestas y teclados.',
+  contacto: '¿Colaboramos? Miau-mándame un mensaje y se lo llevo a Erick.'
 };
 
 yearTag.textContent = new Date().getFullYear();
