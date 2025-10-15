@@ -136,7 +136,7 @@ window.addEventListener('scroll', () => {
     const side = Math.random() < 0.5 ? 'left' : 'right';
     const y = rand(h*0.15, h*0.85);
     const speed = rand(0.4, 0.8) * dpr;
-    const size = rand(20, 35) * dpr;
+    const size = rand(32, 50) * dpr;
     const rotation = rand(0, Math.PI * 2);
     const rotationSpeed = rand(-0.08, 0.08);
 
