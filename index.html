@@ -6,12 +6,12 @@
   <title>Portfolio de Erick Ramirez</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="image" href="assets/cat-companion.png">
-  <link rel="preload" as="image" href="assets/cat-astronaut.png">
+  <link rel="preload" as="image" href="/assets/cat-companion.png">
+  <link rel="preload" as="image" href="/assets/cat-astronaut.png">
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body data-mouse-cursor="assets/mouse-cursor.svg">
+<body data-mouse-cursor="/assets/mouse-cursor.svg">
   <canvas id="bg-stars" class="bg-stars" aria-hidden="true"></canvas>
   <div class="bg-aurora" aria-hidden="true"></div>
 
@@ -39,20 +39,17 @@
       <div class="hero-visual">
         <div class="planet"></div>
 
-        <!-- Anillos -->
-        <div class="ring ring-back" aria-hidden="true"></div>
-        <div class="ring ring-front" aria-hidden="true"></div>
+        <div class="ring ring-back"></div>
+        <div class="ring ring-front"></div>
 
-        <div class="orbit orbit-tilt">
-          <div class="orbit-spin">
-            <div class="satellite" aria-label="Luna">
-              <img class="sat-img" src="assets/cat-astronaut.png" alt="Gatito astronauta" />
-              <span class="tail" aria-hidden="true"></span>
+        <div class="orbit">
+          <div class="satellite">
+            <div class="sat-body">
+              <img class="sat-img" src="/assets/cat-astronaut.png" alt="Gatito astronauta" />
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </header>
 
@@ -195,7 +192,7 @@
   </footer>
 
   <div class="cat-guide">
-    <div class="cat" data-cat-src="assets/cat-companion.png"></div>
+    <div class="cat" data-cat-src="/assets/cat-companion.png"></div>
     <div class="cat-dialog" role="status" aria-live="polite">
       <p id="catMessage">¡Miau! Soy Rorschach, tu guía felino nocturno. Desliza para conocer más.</p>
     </div>

@@ -1,0 +1,50 @@
+/* ===== Reset y Base ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at 10% 20%, rgba(40, 24, 80, 0.4), transparent 60%),
+    radial-gradient(circle at 80% 10%, rgba(0, 212, 255, 0.2), transparent 55%),
+    radial-gradient(circle at 50% 80%, rgba(155, 94, 255, 0.25), transparent 60%),
+    var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  cursor: var(--mouse-cursor);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M0 50H100" stroke="rgba(155,94,255,0.05)"/%3E%3Cpath d="M50 0V100" stroke="rgba(0,212,255,0.05)"/%3E%3C/svg%3E');
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: -2;
+}
+
+h1, h2, h3 {
+  font-family: 'Fira Code', monospace;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-2);
+}
+
+a, button, .btn {
+  cursor: var(--mouse-cursor-interactive);
+}

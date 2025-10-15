@@ -1,0 +1,70 @@
+/* ===== Gato Guía ===== */
+.cat-guide {
+  position: fixed;
+  bottom: clamp(1.5rem, 4vw, 4rem);
+  right: clamp(1.5rem, 4vw, 4rem);
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  z-index: 10;
+}
+
+.cat-guide:not(.cat-ready) {
+  align-items: center;
+}
+
+.cat-guide:not(.cat-ready) .cat {
+  display: none;
+}
+
+.cat-dialog {
+  background: var(--glass);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 18px 18px 4px 18px;
+  padding: 1rem 1.2rem;
+  max-width: 220px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+  transition: transform 0.4s ease;
+}
+
+.cat-dialog p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.cat-guide.is-speaking .cat-dialog {
+  transform: translateY(-6px);
+}
+
+.cat {
+  position: relative;
+  width: clamp(120px, 14vw, 170px);
+}
+
+.cat img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.45));
+}
+
+.cat::after {
+  display: none;
+}
+
+.cat[data-loaded='true']::after {
+  content: '';
+  position: absolute;
+  left: 18%;
+  bottom: -18px;
+  width: 64%;
+  height: 18px;
+  background: radial-gradient(circle, rgba(8, 6, 20, 0.35) 0%, rgba(8, 6, 20, 0) 70%);
+  transform: translateY(50%);
+}
+
+.cat[data-loaded='true'] img {
+  opacity: 1;
+}
