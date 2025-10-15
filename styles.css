@@ -497,3 +497,45 @@ main {
     align-items: flex-start;
   }
 }
+
+/* ===== Fondo Canvas: Starfield + Constelaciones ===== */
+.bg-stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;   /* no interfiere con clics */
+  z-index: -1;            /* detrás del contenido */
+  opacity: 0.55;          /* ajusta visibilidad general */
+}
+
+/* Asegura que el pseudo-fondo no tape el canvas */
+body::before {
+  z-index: -2;            /* mueve tu grilla decorativa más atrás */
+}
+
+/* Respeta accesibilidad: apaga animación si el usuario lo pide */
+@media (prefers-reduced-motion: reduce) {
+  .bg-stars { opacity: 0.25; } /* si querés, bájala aún más */
+}
+
+.bg-aurora{
+  position: fixed;
+  inset: -10vmax;      /* un poco más grande para que el blur no corte bordes */
+  z-index: -1;         /* sobre el canvas, debajo del contenido */
+  pointer-events: none;
+  opacity: 0.32;       /* ajusta el gusto */
+  filter: blur(18px) saturate(115%);
+  background:
+    radial-gradient(60vmax 60vmax at 20% 30%, rgba(155,94,255,0.22), transparent 60%),
+    radial-gradient(60vmax 60vmax at 80% 20%, rgba(0,212,255,0.18), transparent 60%),
+    radial-gradient(70vmax 70vmax at 50% 80%, rgba(155,94,255,0.14), transparent 65%);
+  animation: auroraDrift 28s ease-in-out infinite alternate;
+}
+
+@keyframes auroraDrift{
+  from { transform: translate3d(0,0,0) scale(1); }
+  to   { transform: translate3d(-2vmax, 1.5vmax, 0) scale(1.04); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .bg-aurora{ animation: none; }
+}
