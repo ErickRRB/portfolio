@@ -175,12 +175,12 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 64px;
-  height: 64px;
+  width: 85px;
+  height: 85px;
   transform: translate3d(var(--orb-r), -50%, 0);
   transform-origin: center;
   transform-style: preserve-3d;
-  z-index: 5;
+  z-index: 10; /* Por delante del planeta y anillos */
   background: none;
   box-shadow: none;
   animation: satellite-float 6s ease-in-out infinite;
