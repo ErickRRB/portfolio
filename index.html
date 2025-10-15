@@ -18,6 +18,7 @@
         <li><a href="#sobre-mi">Sobre mí</a></li>
         <li><a href="#habilidades">Habilidades</a></li>
         <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#cat-art">Arte IA</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
     </nav>
@@ -152,10 +153,35 @@
       </div>
     </section>
 
+    <section id="cat-art" class="section cat-art">
+      <div class="section-title">
+        <h2>Arte IA</h2>
+        <span class="section-number">04</span>
+      </div>
+      <div class="cat-art__content">
+        <div class="cat-art__copy">
+          <p>
+            Para darle aún más personalidad a la guía felina, generé con inteligencia artificial una ilustración original de un gatito negro inspirado en Rorschach. Así se mantiene la estética nocturna del portfolio y se refuerza la identidad del personaje.
+          </p>
+          <p>
+            La imagen se crea en tiempo real utilizando un modelo generativo alojado en la nube, lo que permite refrescarla con nuevos detalles cada vez que se recarga la página.
+          </p>
+        </div>
+        <figure class="cat-art__figure">
+          <img
+            src="https://image.pollinations.ai/prompt/ilustraci%C3%B3n%20digital%20de%20un%20gatito%20negro%20con%20ojos%20%C3%A1mbar%20sentado%20sobre%20un%20teclado%20retro%20de%20computadora"
+            alt="Ilustración generada por IA de un gatito negro de ojos ámbar sentado sobre un teclado retro"
+            loading="lazy"
+          />
+          <figcaption>Ilustración generada por IA para Rorschach, el gatito guía.</figcaption>
+        </figure>
+      </div>
+    </section>
+
     <section id="contacto" class="section">
       <div class="section-title">
         <h2>Contacto</h2>
-        <span class="section-number">04</span>
+        <span class="section-number">05</span>
       </div>
       <div class="contact-card">
         <p>
@@ -180,20 +206,42 @@
 
   <div class="cat-guide">
     <div class="cat">
-      <div class="cat-face">
+      <div class="cat-shadow"></div>
+      <div class="cat-tail">
+        <span class="cat-tail-tip"></span>
+      </div>
+      <div class="cat-body">
+        <div class="cat-belly"></div>
+        <div class="cat-paw left"></div>
+        <div class="cat-paw right"></div>
+      </div>
+      <div class="cat-head">
         <div class="cat-ear left"></div>
         <div class="cat-ear right"></div>
-        <div class="cat-eye left"></div>
-        <div class="cat-eye right"></div>
-        <div class="cat-muzzle"></div>
+        <div class="cat-face">
+          <div class="cat-eye left">
+            <span class="cat-eye-pupil">
+              <span class="cat-eye-sparkle"></span>
+            </span>
+          </div>
+          <div class="cat-eye right">
+            <span class="cat-eye-pupil">
+              <span class="cat-eye-sparkle"></span>
+            </span>
+          </div>
+          <div class="cat-whisker left"></div>
+          <div class="cat-whisker right"></div>
+          <div class="cat-nose"></div>
+          <div class="cat-mouth"></div>
+        </div>
       </div>
-      <div class="cat-tail"></div>
     </div>
     <div class="cat-dialog" role="status" aria-live="polite">
-      <p id="catMessage">¡Miau! Soy Rorschach, tu guía felino. Desliza para conocer más.</p>
+      <p id="catMessage">¡Miau! Soy Rorschach, tu guía felino nocturno. Desliza para conocer más.</p>
     </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-Io+qQfeM+n/N2Y5OnKwZq2UTWyxlL6ZSnM4tPFQyu1HFDigONydMUuNuhyGqgYtEJRJB7cE6Ow9qzM0gSgRtVg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="script.js"></script>
 </body>
 </html>
