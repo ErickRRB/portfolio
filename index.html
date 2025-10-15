@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio de Erick Ramirez</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero" id="inicio">
+    <nav class="nav">
+      <div class="logo">&lt;/&gt; Erick Ramirez</div>
+      <ul class="nav-links">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#sobre-mi">Sobre mí</a></li>
+        <li><a href="#habilidades">Habilidades</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="intro">Hola, soy</p>
+        <h1>Erick Ramirez</h1>
+        <p class="tagline">Software Engineer que combina diseño centrado en las personas con ingeniería sólida.</p>
+        <div class="cta-group">
+          <a class="btn primary" href="#proyectos">Ver proyectos</a>
+          <a class="btn secondary" href="#contacto">Hablemos</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="planet"></div>
+        <div class="orbit">
+          <div class="satellite"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="sobre-mi" class="section">
+      <div class="section-title">
+        <h2>Sobre mí</h2>
+        <span class="section-number">01</span>
+      </div>
+      <div class="section-content">
+        <p>
+          Soy un Software Engineer con enfoque fullstack que transforma ideas en productos hermosos y funcionales. Disfruto colaborar con equipos multidisciplinarios y mantener un código limpio, testeable y sostenible.
+        </p>
+        <p>
+          Cuando no estoy programando, puedes encontrarme aprendiendo nuevas tecnologías, jugando videojuegos indies o planificando la próxima aventura.
+        </p>
+      </div>
+    </section>
+
+    <section id="habilidades" class="section">
+      <div class="section-title">
+        <h2>Habilidades</h2>
+        <span class="section-number">02</span>
+      </div>
+      <div class="skills-grid">
+        <article class="skill-card">
+          <h3>Frontend</h3>
+          <ul>
+            <li>React, Next.js</li>
+            <li>TypeScript &amp; JavaScript</li>
+            <li>Animaciones web (GSAP, Framer Motion)</li>
+            <li>Accesibilidad y performance</li>
+          </ul>
+        </article>
+        <article class="skill-card">
+          <h3>Backend</h3>
+          <ul>
+            <li>Node.js, Express</li>
+            <li>APIs REST &amp; GraphQL</li>
+            <li>Bases de datos SQL/NoSQL</li>
+            <li>Infraestructura en la nube</li>
+          </ul>
+        </article>
+        <article class="skill-card">
+          <h3>Herramientas</h3>
+          <ul>
+            <li>Git &amp; GitHub</li>
+            <li>CI/CD</li>
+            <li>Storybook</li>
+            <li>Testing (Jest, Testing Library)</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="proyectos" class="section">
+      <div class="section-title">
+        <h2>Proyectos destacados</h2>
+        <span class="section-number">03</span>
+      </div>
+      <div class="projects-grid">
+        <article class="project-card">
+          <div class="project-header">
+            <span class="badge">Web App</span>
+            <h3>Galaxy Planner</h3>
+          </div>
+          <p>
+            Aplicación para planificar viajes que sincroniza calendarios y analiza clima con visualizaciones interactivas.
+          </p>
+          <ul class="project-stack">
+            <li>React</li>
+            <li>TypeScript</li>
+            <li>Supabase</li>
+          </ul>
+          <div class="project-links">
+            <a href="https://github.com/Erickrrb" aria-label="GitHub de Erick Ramirez">Ver perfil en GitHub</a>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-header">
+            <span class="badge">Mobile</span>
+            <h3>MiauFit</h3>
+          </div>
+          <p>
+            App móvil gamificada para adoptar hábitos saludables con misiones diarias y comunidad integrada.
+          </p>
+          <ul class="project-stack">
+            <li>React Native</li>
+            <li>Expo</li>
+            <li>Firebase</li>
+          </ul>
+          <div class="project-links">
+            <a href="https://github.com/Erickrrb" aria-label="GitHub de Erick Ramirez">Ver perfil en GitHub</a>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-header">
+            <span class="badge">Experimento</span>
+            <h3>Pixel Playground</h3>
+          </div>
+          <p>
+            Micro-sitio interactivo para explorar color, forma y tipografía con animaciones WebGL suaves.
+          </p>
+          <ul class="project-stack">
+            <li>Three.js</li>
+            <li>Vite</li>
+            <li>Netlify</li>
+          </ul>
+          <div class="project-links">
+            <a href="https://github.com/Erickrrb" aria-label="GitHub de Erick Ramirez">Ver perfil en GitHub</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contacto" class="section">
+      <div class="section-title">
+        <h2>Contacto</h2>
+        <span class="section-number">04</span>
+      </div>
+      <div class="contact-card">
+        <p>
+          ¿Te gustaría construir algo juntos? Escríbeme y diseñemos una solución a medida.
+        </p>
+        <a
+          class="btn primary"
+          href="mailto:erickricardorb@gmail.com"
+        >erickricardorb@gmail.com</a>
+        <div class="socials">
+          <a href="https://github.com/Erickrrb" aria-label="GitHub">GitHub</a>
+          <a href="https://www.linkedin.com/in/Erickrrb" aria-label="LinkedIn">LinkedIn</a>
+          <a href="https://twitter.com/Erickrrb" aria-label="Twitter">Twitter</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Erick Ramirez. Diseñado con un toque gatuno.</p>
+  </footer>
+
+  <div class="cat-guide">
+    <div class="cat">
+      <div class="cat-face">
+        <div class="cat-ear left"></div>
+        <div class="cat-ear right"></div>
+        <div class="cat-eye left"></div>
+        <div class="cat-eye right"></div>
+        <div class="cat-muzzle"></div>
+      </div>
+      <div class="cat-tail"></div>
+    </div>
+    <div class="cat-dialog" role="status" aria-live="polite">
+      <p id="catMessage">¡Miau! Soy Rorschach, tu guía felino. Desliza para conocer más.</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
