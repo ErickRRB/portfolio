@@ -12,6 +12,8 @@ const messages = {
   contacto: '¿Colaboramos? Prometo llevar tu mensaje a Erick con mi collar rojo reluciente.'
 };
 
+
+
 yearTag.textContent = new Date().getFullYear();
 
 if (catContainer) {
