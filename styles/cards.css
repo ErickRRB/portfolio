@@ -52,29 +52,55 @@
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .project-card {
   background: var(--card);
-  border-radius: 24px;
-  padding: 2rem;
+  border-radius: 32px;
+  padding: 2.5rem;
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
-  display: grid;
-  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
   position: relative;
   overflow: hidden;
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   opacity: 0;
   transform: translateY(40px) scale(0.95);
   animation: fadeInScale 0.7s ease forwards;
+  min-height: 400px;
 }
 
-.project-card:nth-child(1) { animation-delay: 0.1s; }
-.project-card:nth-child(2) { animation-delay: 0.25s; }
-.project-card:nth-child(3) { animation-delay: 0.4s; }
+/* Bento Grid Layout - Asimétrico */
+.project-card:nth-child(1) {
+  grid-column: span 7;
+  animation-delay: 0.1s;
+  background: linear-gradient(135deg, rgba(155, 94, 255, 0.08) 0%, rgba(0, 212, 255, 0.05) 100%), var(--card);
+}
+
+.project-card:nth-child(2) {
+  grid-column: span 5;
+  animation-delay: 0.25s;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.08) 0%, rgba(155, 94, 255, 0.05) 100%), var(--card);
+}
+
+.project-card:nth-child(3) {
+  grid-column: span 12;
+  animation-delay: 0.4s;
+  flex-direction: row;
+  align-items: center;
+  min-height: 320px;
+  background: linear-gradient(90deg, rgba(155, 94, 255, 0.06) 0%, rgba(0, 212, 255, 0.06) 100%), var(--card);
+}
+
+.project-card:nth-child(3) .project-content {
+  flex: 1;
+}
 
 @keyframes fadeInScale {
   to {
@@ -83,23 +109,53 @@
   }
 }
 
+/* Efecto de brillo en movimiento */
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.03) 50%,
+    transparent 70%
+  );
+  transform: rotate(45deg);
+  transition: all 0.6s ease;
+  opacity: 0;
+}
+
+.project-card:hover::before {
+  opacity: 1;
+  left: 100%;
+}
+
+/* Gradiente hover más intenso */
 .project-card::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(155, 94, 255, 0.15), rgba(0, 212, 255, 0.15));
-  mix-blend-mode: screen;
+  background: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(155, 94, 255, 0.2),
+    transparent 50%
+  );
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s ease;
   z-index: 0;
+  pointer-events: none;
 }
 
 .project-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-8px) scale(1.02);
   border-color: var(--accent);
   box-shadow:
-    var(--shadow),
-    0 0 40px rgba(155, 94, 255, 0.25);
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(155, 94, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .project-card:hover::after {
@@ -111,31 +167,64 @@
   z-index: 1;
 }
 
+.project-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  flex: 1;
+}
+
 .project-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  gap: 1rem;
+}
+
+.project-header h3 {
+  font-size: 1.8rem;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease;
+}
+
+.project-card:hover .project-header h3 {
+  transform: translateX(4px);
 }
 
 .badge {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   text-transform: uppercase;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.2em;
+  font-weight: 700;
   color: var(--accent-2);
+  background: rgba(0, 212, 255, 0.1);
   border: 1px solid var(--accent-2);
   border-radius: 999px;
-  padding: 0.4rem 0.8rem;
+  padding: 0.5rem 1rem;
   position: relative;
-  animation: badge-pulse 3s ease-in-out infinite;
+  white-space: nowrap;
+  backdrop-filter: blur(10px);
 }
 
-@keyframes badge-pulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 0 6px rgba(0, 212, 255, 0);
-  }
+.badge::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 999px;
+  padding: 2px;
+  background: linear-gradient(135deg, var(--accent-2), var(--accent));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover .badge::before {
+  opacity: 1;
 }
 
 .project-stack {

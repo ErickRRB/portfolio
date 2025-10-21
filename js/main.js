@@ -7,6 +7,7 @@ import { initCatGuide } from './modules/cat-guide.js';
 import { initStarfield } from './modules/starfield.js';
 import { initPlanet } from './modules/planet.js';
 import { initCustomCursor } from './modules/custom-cursor.js';
+import { initProjectCards } from './modules/project-cards.js';
 
 // Initialize footer year
 const yearTag = document.getElementById('year');
@@ -21,4 +22,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initStarfield();
   initPlanet();
   initCustomCursor();
+  initProjectCards();
 });
